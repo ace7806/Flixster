@@ -26,6 +26,9 @@ Flix is an app that allows users to browse movies from the [The Movie Database A
 
 ### Notes
 
+I added a scrolling view to the details Activity page so when the textView (overview paragraph) is overflowing
+the user can scroll down and keep reading without being cut off
+
 One of the challenges I faced on this project was getting some nice round corners on the images so it could look nice,
 I found it it wasn't that simple since messing with transforms could be messy but  quickly figured I needed some help and 
 thankfully I was able to resolve it quickly with an android Guru, it was a nice experience.
