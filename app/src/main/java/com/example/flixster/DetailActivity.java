@@ -3,6 +3,7 @@ package com.example.flixster;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ public class DetailActivity extends YouTubeBaseActivity {
     TextView tvOverview;
     RatingBar ratingBar;
     YouTubePlayerView youTubePlayerView;
+    Movie movie;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +40,7 @@ public class DetailActivity extends YouTubeBaseActivity {
         tvOverview = findViewById (R.id.tvOverview);
         ratingBar = findViewById (R.id.ratingBar);
         youTubePlayerView = findViewById((R.id.player));
-        Movie movie = Parcels.unwrap(getIntent().getParcelableExtra("movie"));
+        movie = Parcels.unwrap(getIntent().getParcelableExtra("movie"));
         tvTitle.setText(movie.getTitle());
         tvOverview.setText(movie.getOverview());
         ratingBar.setRating((float)movie.getRating());
@@ -72,7 +74,10 @@ public class DetailActivity extends YouTubeBaseActivity {
         @Override
         public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
             Log.d(TAG,"OnInitializeSuccess");
-            youTubePlayer.cueVideo(youtubeKey);
+            if(movie.getRating()>5.0)
+                youTubePlayer.loadVideo(youtubeKey);
+            else
+                youTubePlayer.cueVideo(youtubeKey);
         }
 
         @Override
